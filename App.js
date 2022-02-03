@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RootSiblingParent } from 'react-native-root-siblings';
+import Blogs from './screens/blogsScreen';
+import Comments from './screens/commentsScreen';
+import NetInfo from '@react-native-community/netinfo';
+
 
 export default function App() {
+
+  const Stack = createNativeStackNavigator()
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+    <RootSiblingParent>
+    <NavigationContainer>
+    <Stack.Navigator>
+
+    <Stack.Screen name="Blogs" component={Blogs} options={{ title: 'BlogPosts', headerStyle:{backgroundColor: 'white'} }}/>
+    <Stack.Screen name="Comments" component={Comments} options={{ title: 'Comments for this Blog' }}/>
+
+    </Stack.Navigator>
+  </NavigationContainer>
+
+  </RootSiblingParent>
+    
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
